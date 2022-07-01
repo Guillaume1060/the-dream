@@ -26,10 +26,6 @@ $countriesWithCurrency = [
                 'ratePerOneEuro' => 118.99,
             ],
 ];
-// print_r ($countriesWithCurrency);
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -40,24 +36,27 @@ $countriesWithCurrency = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The dream</title>
 </head>
+
+<!-- CCS PART  -->
 <style type="text/css">
     html, body { margin: 0.3rem; font-family: Georgia; font-size: 1.2rem;}
     header { text-align: center; color: white; background-color: green; height: auto; font-size: 3rem}
     .contener { width: 500px; margin: auto;}
     article { margin-top: 50px; background: #6ca4da;
-        border : solid 0.1rem;
+        border : solid 0.3rem;
         box-shadow: 8px 8px 0px #aaa; }
     #bouton {
-        
+        font-style:oblique;
+        background-color: green;
         display: block;
         margin-left: auto;
         margin-right: auto;
-        color:red;
+        color:white;
         width: 10rem;
         height: 10rem;
         border-radius: 80%;
         font-size: 1.5rem;
-        border : solid 0.1rem;
+        border : solid;
         box-shadow: 8px 8px 0px #aaa; 
     
     }
@@ -68,16 +67,26 @@ $countriesWithCurrency = [
     }
     h3 { text-align: center;}
     form{ margin-left: 0.5rem;}
-    
 
+    #texte, .select-style select {
+        width: 70%;
+        height: 30px;
+        border: 1px solid #999;
+        font-size: 18px;
+        color: #1c87c9;
+        background-color: #eee;
+        border-radius: 5px;
+        box-shadow: 4px 4px #ccc;}
 
-
-
-
-
+    @media screen and (max-width: 600px)
+    {
+        html, body { font-size: 1rem;}
+        .contener { width: auto; margin: 0;}
+    }
 
 </style>
-   
+  <!-- END CSS -->
+
 <body>
 
     <header>
@@ -89,12 +98,13 @@ $countriesWithCurrency = [
         <h1>
             Currency Converter
         </h1>
-        <h3>Destination:</h3>
+        <h3>DESTINATION</h3>
 
 <form action="" method="post">
-    <label for="countryChoosed">Where are you ?</label>
+    <label for="countryChoosed">Where are (or will) you ?</label>
+    <div class="select-style">
     <select name="countryChoosed" id="countryChoosed">
-    <option value="">--Please choose a country--</option>
+    <option value="">Thailand or --Please choose a country--</option>
 <?PHP
     foreach ($countriesWithCurrency as $country)
     {
@@ -102,23 +112,18 @@ $countriesWithCurrency = [
     }
 
 echo '</select>';
+echo '</div>';
 echo '<form/>';
 $countryChoosed = $_POST['countryChoosed'];
 $indexOfcountryChoosed = array_search ($countryChoosed,array_column($countriesWithCurrency,'country'));
-
-
-
-
 ?>
 <br/>
 
-
-
-
-
 <form action="theDream.php" method="post">
- <p>How many <?PHP echo $walletAmount.' '.$countriesWithCurrency[$indexOfcountryChoosed]['localCurrency'] ?> do you have ? <input type="text" name="wallet" /></p>
+<div class="select-style">
+ <p>How many <?PHP echo $walletAmount.' '.$countriesWithCurrency[$indexOfcountryChoosed]['localCurrency'] ?> do you have ? <br/><input type="text" id="texte" name="wallet" /></p><br/>
  <p><input type="submit" id= "bouton" value="AM I RICH ?"></p>
+</div>
 </form>
 
 <?PHP
@@ -128,17 +133,13 @@ if (!isset($_POST['wallet']))
     return;
 }	
 
-
-
 $walletAmount = htmlspecialchars($_POST['wallet']);
-$changewalletAmount = $walletAmount * $countriesWithCurrency[$indexOfcountryChoosed]['ratePerOneEuro'];
+$changewalletAmount = $walletAmount / $countriesWithCurrency[$indexOfcountryChoosed]['ratePerOneEuro'];
 ?>
-
 <br/>
 <p id="result"> So you have <?PHP echo $walletAmount.' '.$countriesWithCurrency[$indexOfcountryChoosed]['localCurrency'] ?><br/><br/> You own <?PHP echo $changewalletAmount ?> EUROS in your pocket ! </p>
     </article>
 </div>
-
 </body>
 </html>
 
