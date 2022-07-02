@@ -1,5 +1,8 @@
 # The dream 🍹
 
+![image](https://user-images.githubusercontent.com/103244618/177002570-7400f307-7427-480a-88fa-dffed7ba4c1c.png)
+
+
 - Repository: `the-dream`
 - Type of Challenge: `Learning`
 - Duration: `1 day`
